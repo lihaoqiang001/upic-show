@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rankListModule">
+<head>
+    <meta charset="UTF-8">
+    <title>排行榜</title>
+    <link rel="stylesheet" href="css/picDisModule.css"/>
+    <link rel="stylesheet" href="css/glyphicons.css"/>
+    <link rel="stylesheet" href="css/nav.css"/>
+    <link rel="stylesheet" href="css/swiper/swiper.min.css"/>
+    <link rel="stylesheet" href="css/foot.css"/>
+    <style>
+        div.listArea{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .illustrationArea{
+            width: 100%;
+            margin-top: 20px;
+            min-height:200px;
+            display: flex;
+            flex-direction: column;
+            /*border: 1px solid;*/
+        }
+        .illustrationArea .illustration{
+            width: 100%;
+            height: 300px;
+            /*border: 1px solid;*/
+        }
+        div.picListHeader{
+            /*border: 1px solid;*/
+            position: relative;
+            width: 1200px;
+            height: 80px;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed darkred;
+        }
+        .picListHeader .typeInfo{
+            height: 100%;
+            line-height: 80px;
+        }
+        .picListHeader .typeInfo .text{
+            display: inline-block;
+            font-size: 20px;
+            margin-left: 10px;
+            text-decoration: none;
+            color: black;
+        }
+        .picListHeader .typeInfo .text:hover{
+            color: gray;
+        }
+        .picListHeader .time{
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 30px;
+            font-size: 14px;
+            color: gray;
+        }
+        .listArea .list{
+            display: inline-flex;
+            flex-direction: column;
+            width: 1200px;
+            min-height: 400px;
+        }
+        /*swiper插件*/
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .swiper-wrapper .swiper-slide{
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body ng-controller="rankListController">
+
+<div ng-include="'nav.html'" class="navCon"></div>
+
+<div class="body">
+    <div class="header">
+
+    </div>
+
+    <div class="illustrationArea">
+        <div class="illustration">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!--<div class="swiper-slide" ng-repeat="slide in slides">-->
+                    <div class="swiper-slide img" style="background-image: url('img/s1.jpg')">
+                        <!--<div class="img" ng-style="{'background-image':'url({{slide}})'}"></div>-->
+                        <!--<div class="img" style="background-image: url('img/s1.jpg')"></div>-->
+                    </div>
+                    <!--<div class="swiper-slide img" style="background-image: url('img/s2.jpg')"></div>-->
+                    <!--<div class="swiper-slide img" style="background-image: url('img/s3.jpg')"></div>-->
+                    <!--<div class="swiper-slide img" style="background-image: url('img/s4.jpg')"></div>-->
+                    <!--<div class="swiper-slide img" style="background-image: url('img/s5.jpg')"></div>-->
+                    <!--<div class="swiper-slide img" style="background-image: url('img/s6.jpg')"></div>-->
+                    <div class="swiper-slide img" style="background-image: url('img/s7.jpg')"></div>
+                    <!--<div class="swiper-slide img" style="background-image: url('img/s8.jpg')"></div>-->
+                    <div class="swiper-slide img" style="background-image: url('img/s9.jpg')"></div>
+                    <div class="swiper-slide img" style="background-image: url('img/s10.jpg')"></div>
+                    <div class="swiper-slide img" style="background-image: url('img/s11.jpg')"></div>
+                    <!--<div class="swiper-slide img" style="background-image: url('img/s12.jpg')"></div>-->
+                </div>
+                <!-- Add Scrollbar -->
+                <!--<div class="swiper-scrollbar"></div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="listArea">
+        <div class="picListHeader">
+            <div class="typeInfo"><div style="font-size: 20px;color: #1ABC9C" class="glyphicon glyphicon-stats"></div><a ng-href="#" ng-repeat="rank in ranks" class="text">{{rank}}</a></div>
+            <div class="time"><span class="text">{{'更新时间：' + updateTime}}</span></div>
+        </div>
+        <div class="list">
+            <div setpicdataset="{{'/upic-show/search?pName='}}">
+				
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer" ng-include="'./footer.html'"></div>
+</div>
+
+
+<script src="js/angular.js"></script>
+<script src="js/picDisModule.js"></script>
+<script src="js/swiper/swiper.min.js"></script>
+<script type="text/javascript" src='js/angular-cookies.js'></script>
+<script>
+    let rankListModule = angular.module('rankListModule',['picDisModule','ngCookies'])
+        .controller('rankListController',($scope,$cookieStore)=>{
+            $scope.ranks = ['日排行','周排行','月排行']
+            $scope.updateTime='2017年11月2日'
+            let slides = []
+            for(let i = 1;i <=3;i++){
+                slides.push('img/s'+i+'.jpg')
+            }
+            $scope.slides = slides
+            console.log(slides)
+            
+           if($cookieStore.get("user") != undefined){
+        	   $scope.isLogin = true
+        	   console.log($cookieStore.get("user"))
+        	   $scope.userName = $cookieStore.get("user")['userNumber']
+           }
+            $scope.logout = ()=>{
+            	$cookieStore.remove("user")
+            	alert('注销成功')
+            	location.reload()
+            }
+        })
+    new Swiper('.swiper-container', {
+        lazy:true,
+        initialSlide:1,
+        // scrollbar: {
+        //     el: '.swiper-scrollbar',
+        //     hide: true,
+        // },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        }
+    });
+
+</script>
+</body>
+</html>

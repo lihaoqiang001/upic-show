@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="registerModule">
+	<head>
+		<meta charset="UTF-8">
+		<title>Upic登录</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/zhuce.css"/>
+	</head>
+	<body>
+		<div class="wrap clearfix">
+			<div class="left">
+				<div class="top clearfix">
+					<a href="login.html" class="login">登录</a>
+					<a href="#" class="register">注册</a>
+				</div>
+				<form name='regisForm' ng-controller="RegisterController">
+					<input type="text" name="userNumber" ng-pattern="/^15\d{8}$/" ng-model="userNumber" class='userNumber' required="required" placeholder="请输入账号"/>
+<!--					<input type="button" id="mobie" value="获取手机验证码" />-->
+					<div class="errorText"  ng-messages="regisForm.userNumber.$error" ng-if="regisForm.userNumber.$touched">
+						<div ng-message="required">账号必须填写</div>
+						<div ng-message="pattern">请输入10位学号</div>
+					</div>
+					
+					<input type="email" name="userEmail" ng-model="userEmail" id="email" required="required"  placeholder="请输入注册邮箱"/>
+					<div class="errorText" ng-messages='regisForm.userEmail.$error' ng-if='regisForm.userEmail.$touched'>
+					    <div ng-message="email">邮箱格式不正确</div>
+                    	<div ng-message="required">邮箱必须填写</div>
+					</div>
+					
+					<input type="text" name="userName" ng-model="userName" required="required" ng-minlength="2" ng-maxlength="12" id="name" placeholder="请输入姓名"/>
+					<div class="errorText" ng-messages='regisForm.userName.$error' ng-if='regisForm.userName.$touched'>
+					    <div ng-message="minlength">姓名最小长度为2</div>
+                   		<div ng-message="maxlength">姓名最大长度为10</div>
+                    	<div ng-message="required">姓名必须填写</div>
+					</div>
+					
+					<input type="password" name="userPwd" ng-model="userPwd" required="required" ng-minlength="8" ng-maxlength="20" id="password" placeholder="请输入密码"/>
+					<div class="errorText" ng-messages='regisForm.userPwd.$error' ng-if='regisForm.userPwd.$touched'>
+					    <div ng-message="minlength">密码最小长度为8</div>
+                   		<div ng-message="maxlength">密码最大长度为20</div>
+                    	<div ng-message="required">密码必须填写</div>
+					</div>	
+					
+					<input type="password" name="pas" ng-model="pas" id="pas"  placeholder="请确认密码" ng-blur="checkRePwd()" />
+					<div class="errorText" ng-show='userPwd != "undefined"'>
+					    <div ng-show="pas != userPwd">两次密码不一致或密码不符合要求</div>
+					</div>
+					
+					<input type="text" name="userPhone" ng-pattern='/^1[34578]\d{9}$/' required="required" ng-model="userPhone" id="tex"  placeholder="请输入手机号码"/>					
+					<input type="button" id="mobie" value="获取手机验证码" />
+					<div class="errorText" ng-messages='regisForm.userPhone.$error' ng-if='regisForm.userPhone.$touched'>
+                    	<div ng-message="required">手机必须填写</div>
+                    	<div ng-message='pattern'>手机号码格式不正确</div>
+					</div>	
+					
+					<input type="text" name="vCode" ng-pattern="/^\d{6}$/" ng-model="vCode" id="mtex" placeholder="请输入手机验证码" />
+					<div class="errorText" ng-messages="regisForm.vCode.$error">
+						<div ng-message="pattern">请输入6位验证码</div>
+					</div>
+					
+					<div class="lik">
+						<input type="checkbox" checked name="" id="" value="" />
+						<span>同意</span>
+						<a href="#" class="pro">UPIC注册协议及版权申明</a>
+					</div>
+					<input type="button" ng-click='register()' name="" id="sub" value="注册" />
+				</form>
+			</div>
+			<!--<div class="right">
+				<input type="button" id="close" value="" />
+				<span id="sp">使用快捷方式登录:</span>
+				<a href=""><img src="img/wetchat.png" width="40px" height="40px" /></a>
+				<a href=""><img src="img/qq.png" width="40px" height="40px"/></a>
+				<a href=""><img src="img/weibo.png" width="38px" height="38px"/></a>
+			</div>-->
+		</div>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-messages.min.js"></script>
+		<script>
+			let loginModule = angular.module('registerModule',['ngMessages'])
+				.controller('RegisterController',($scope,$http)=>{
+					$scope.register = () => {
+						$http({url:'/upic-show/register',
+							method:'POST',
+							params:{'userNumber':$scope.userNumber,
+								'userEmail':$scope.userEmail,
+								'userName':$scope.userName,
+								'userPwd':$scope.userPwd,
+								'userPhone':$scope.userPhone,
+								'pas':$scope.pas},
+							}).success(function(data){
+								if(data.isSuccess == 1){
+									alert('注册成功！')
+									location='index.html'
+								}else{
+									if(data.error != 'undefined' && data.error != '' && data.error != null)
+										alert('注册失败:'+data.error)
+									else{
+										alert('注册失败')
+									}
+								}
+							}).error(function(){
+								alert('服务器请求失败')
+							})
+					}
+				})
+		</script>
+	</body>
+</html>

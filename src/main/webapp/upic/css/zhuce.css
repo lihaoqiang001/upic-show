@@ -1,0 +1,176 @@
+.wrap {
+	width: 529px;
+	margin: 0 auto;
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.left {
+	width: 393px;
+	float: left;
+	padding: 0 61px 0 58px;
+}
+
+.right {
+	width: 136px;
+	float: left;
+	border-left: 1px solid #a7b3b9;
+	padding-top: 53px;
+	position: relative;
+	height: 386px
+}
+
+.top {
+	height: 63px;
+	border-bottom: 1px solid #a7b3b9;
+	width: 335px;
+}
+
+.login {
+	display: block;
+	width: 61px;
+	float: left;
+	text-align: center;
+	line-height: 61px;
+	text-decoration: none;
+	font-size: 19px;
+	color: #A7B3B9;
+}
+
+.register {
+	display: block;
+	width: 61px;
+	float: left;
+	text-align: center;
+	line-height: 61px;
+	text-decoration: none;
+	font-size: 19px;
+	color: #042b79;
+	border-bottom: 2px solid #0e5ebe;
+}
+
+form {
+	padding-top: 24px;
+}
+.userNumber,
+#user {
+	width: 271px;
+	height: 30px;
+	padding-left: 7px;
+	font-size: 13px;
+}
+
+#email {
+	margin-top: 15px;
+	width: 271px;
+	height: 30px;
+	padding-left: 7px;
+	font-size: 13px;
+}
+
+#name {
+	margin-top: 15px;
+	width: 271px;
+	height: 30px;
+	padding-left: 7px;
+	font-size: 13px;
+}
+
+#password {
+	width: 271px;
+	height: 30px;
+	padding-left: 7px;
+	font-size: 13px;
+	margin-top: 15px;
+}
+
+#pas {
+	width: 271px;
+	height: 30px;
+	padding-left: 7px;
+	font-size: 13px;
+	margin-top: 15px;
+}
+
+#tex {
+	margin-top: 15px;
+	width: 148px;
+	height: 30px;
+	font-size: 14px;
+	padding-left: 7px;
+}
+
+#mobie {
+	width: 120px;
+	height: 30px;
+	font-size: 13px;
+}
+
+.lik {
+	padding: 8px 0 8px 0;
+}
+
+.pro {
+	color: #2fa2e9;
+	text-decoration: none;
+}
+
+#sub {
+	width: 271px;
+	height: 45px;
+	background: #0e5ebe;
+	border: none;
+	font-size: 15px;
+	color: white;
+	margin-bottom: 10px;
+}
+
+#close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background: url(../img/close.JPG) no-repeat center center;
+	border: none;
+}
+
+#sp {
+	color: #898991;
+	padding-left: 6px;
+	margin-bottom: 20px;
+	display: block;
+}
+
+.right a {
+	display: block;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 2px solid #e8ebed;
+	margin-left: 42px;
+	margin-bottom: 10px;
+	padding: 2px;
+}
+
+.right img {
+	border-radius: 50%;
+}
+
+body {
+	background-image: url(../img/beverage-coffee-computer-877695.jpg);
+	height: 100vh;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+#mtex {
+	height: 39px;
+	margin-top: 10px;
+	padding-left: 3px;
+	width: 270px;
+}
+
+.errorText div{
+	color: red;
+	font-size: 14px;
+	line-height: 100%;
+	margin-top: 5px;
+}

@@ -1,0 +1,66 @@
+<div class="top">
+    <div class="logo"></div>
+    <div class="top_nav">
+        <nav>
+            <ul class="nav-ul">
+                <li><a href="index.html">首页</a></li>
+                <li>
+                    <a href="#" >精选收藏夹</a>
+                    <ul>
+
+                        <li class="nav-effect-1" id="force"><a href="#">明星设计师</a></li>
+                        <li class="nav-effect-2"><a href="#">世界杯</a></li>
+                        <li class="nav-effect-3"><a href="#">毕业季</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">商用海报</a>
+                    <ul>
+
+                        <li class="nav-effect-1" id="force"><a href="#">旅游海报</a></li>
+                        <li class="nav-effect-1"><a href="#">招聘海报</a></li>
+                        <li class="nav-effect-2"><a href="#">美食海报</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">手机用图</a>
+                    <ul>
+                        <li class="nav-effect-1" id="force"><a href="#">表情包配图</a></li>
+                        <li class="nav-effect-1" ><a href="#">企业宣传</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">插画绘图</a>
+                    <ul>
+                        <li class="nav-effect-1" id="force"><a href="#">夏天插画</a></li>
+                        <li class="nav-effect-1" ><a href="#">星空绘图</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >关于我们</a>
+                    <ul>
+                        <li class="nav-effect-2" id="force"><a href="#">关于我们</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="top_two">
+        <input type="text" ng-model="searchWd" id='searchWd' placeholder="   你想要什么？"/>
+        <a ng-href='{{"/upic-show/upic/list.html?type=search&&pName="+searchWd}}' id='searchBu' class="search"><span  class="glyphicon glyphicon-search"></span>	</a>
+    </div>
+    <div ng-init="isLogin=false" ng-if="!isLogin" class="login">
+        <div class="glyphicon glyphicon-user" style="margin-top: 0;"></div>
+        <a href="login.html" class="sim-button button8">去登录</a>
+        <div class="glyphicon glyphicon-pencil" style="margin-top: 0;"></div>
+        <a href="register.html" class="sim-button button8">去注册</a>
+    </div>
+    <div class=login ng-if="isLogin">
+    	<div class="glyphicon glyphicon-user" style="font-size: 16px;">&nbsp;欢迎您：{{userName}}</div>
+    	<div class="glyphicon glyphicon-off"></div>
+    	<a class='logout' ng-click='logout()' href="javascript:void(0)">注销</a>
+    </div>
+    <div></div>
+</div>

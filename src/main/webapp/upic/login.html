@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="loginModule">
+	<head>
+		<meta charset="UTF-8">
+		<title>登录Upic</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/login.css"/>
+	</head>
+	<body >
+		<div class="wrap clearfix">
+			<div class="left">
+				<div class="top clearfix">
+					<a href="" class="login">登录</a>
+					<a href="register.html" class="register">注册</a>
+				</div>
+				<form name='loginForm' ng-controller="LoginController">
+					<input type="text" name="userName" ng-minlength='6'
+						ng-maxlength='12' required="required"
+						 ng-model="userName" id="user"  placeholder="请输入账号"/>
+					<div class="errorText" ng-messages='loginForm.userName.$error' ng-if='loginForm.userName.$touched'>
+					    <div ng-message="minlength">用户名最小长度为6</div>
+                   		<div ng-message="maxlength">用户名最大长度为12</div>
+                    	<div ng-message="required">用户名必须填写</div>
+					</div>
+					<input type="password" name="userPwd" id="pasword1" placeholder="请输入密码" 
+						ng-model="userPwd" required='required' ng-maxlength='20' ng-minlength='8'/>
+					<div class="errorText" ng-messages='loginForm.userPwd.$error' ng-if='loginForm.userPwd.$touched'>
+					    <div ng-message="minlength">密码最小长度为8</div>
+                   		<div ng-message="maxlength">密码最大长度为20</div>
+                    	<div ng-message="required">密码必须填写</div>
+					</div>	
+					<!--<input type="text" name="" id="tex" value=""  placeholder="请输入手机号码"/>-->
+					<!--<input type="button" id="mobie" value="获取手机验证码" />
+					<input type="text" name="mtex" id="mtex" value="" placeholder="请输入手机验证码" />-->
+					<div class="lik">
+						<input type="checkbox" name="" id="forget" value="" />
+						<a href="#" class="zi" id="">七天内自动登录</a>
+						<!--<a href="#">忘记密码</a>-->
+					</div>
+					<button ng-click='login()' name="" id="sub">登录</button>
+				</form>
+			</div>
+			<!--<div class="right">
+				<input type="button" id="close" value="" />
+				<span id="sp">使用快捷方式登录:</span>
+				<a href=""><img src="img/wetchat.png" width="40px" height="40px" /></a>
+				<a href=""><img src="img/qq.png" width="40px" height="40px"/></a>
+				<a href=""><img src="img/weibo.png" width="38px" height="38px"/></a>
+			</div>-->
+		</div>
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="js/angular-messages.min.js"></script>
+		<script type="text/javascript" src="js/angular-cookies.js"></script>
+		<script>
+			let url = '/upic-show/'
+			let loginModule = angular.module('loginModule',['ngMessages','ngCookies'])
+				.controller('LoginController',($scope,$http,$location,$cookieStore)=>{
+					$scope.login = () => {
+						console.log(typeof($scope.userPwd))
+						if(typeof($scope.userPwd) !== 'undefined' && typeof($scope.userName) !== 'undefined'){
+							$http({url:url+'login',
+								method:'POST',
+								params:{'userName':$scope.userName,'userPwd':$scope.userPwd},
+								}).success(function(data){
+								    console.log(data)
+									if(data.isSuccess == 1){
+										alert('登陆成功！')
+										location='index.html'
+										$cookieStore.put("user",{'userNumber':$scope.userName})
+									}else{
+										alert('登陆失败')
+									}
+								}).error(function(){
+									alert('服务器请求失败')
+								})
+						}
+						else
+							alert('校验失败')
+					}
+				})
+		</script>
+	</body>
+</html>

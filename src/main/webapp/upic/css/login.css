@@ -1,0 +1,31 @@
+.wrap{width:529px;margin: 0 auto;background: rgba(255,255,255,0.7);flex:1;justify-content:center;}
+.left{width: 100%; padding: 0 61px 0 58px; opacity: 0.8;}
+.right{width: 136px;float: left;border-left: 1px solid #a7b3b9;padding-top: 53px;position: relative;height: 386px}
+.top{height: 63px;border-bottom: 1px solid #a7b3b9;width: 335px;}
+.login{display: block;width: 61px;float: left;text-align:center;line-height: 61px;text-decoration:none;border-bottom: 2px solid #0e5ebe;color: #042b79;font-size: 19px;}
+.register{display: block;width: 61px;float: left;text-align:center;line-height: 61px;text-decoration:none;border:0;font-size: 19px;color: #A7B3B9;}
+form{padding-top: 24px;}
+#user{width:271px ;height:37px ;padding-left: 7px;font-size: 13px;}
+#pasword1{width:271px ;height:37px ;padding-left: 7px;font-size: 13px;margin-top: 25px;}
+#tex{width: 150px;height: 37px;font-size: 14px;padding-left: 7px;}
+#mobie{width: 120px;height: 37px;font-size: 13px;}
+.lik{padding: 10px 0 10px 0;}
+.lik a{text-decoration: none;color: #898991;}
+.zi{margin-right: 55px;}
+#sub{width:271px ;height: 48px;background: #0e5ebe;border: none;font-size: 15px;color: white;margin-bottom: 50px;}
+#close{position: absolute;top: 5px;right: 5px;background:  url(../img/close.JPG) no-repeat center center;border: none;}
+#sp{color: #898991;padding-left: 6px;margin-bottom: 20px;display: block;}
+.right a{display: block;width: 48px;height: 48px;border-radius: 50%;border: 2px solid #e8ebed;margin-left: 42px;margin-bottom: 10px;padding: 2px;}
+.right img{border-radius: 50%;}
+body{background-image:url(../img/adventure-alone-backlit-746386.jpg);
+     background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-height: 100vh;
+}
+#mtex{height: 39px;margin-top: 10px;padding-left: 3px;width: 270px;}
+.errorText div{
+	color: red;
+	font-size: 14px;
+	line-height: 100%;
+	margin-top: 5px;
+}

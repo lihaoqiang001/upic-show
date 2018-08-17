@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="uploadModule">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" href="css/upload.css" rel="stylesheet"/>
+    <link type="text/css" href="css/nav.css" rel="stylesheet"/>
+    <link type="text/css" href="css/glyphicons.css" rel="stylesheet"/>
+    <style>
+    	nav .nav-ul{
+    		line-height:normal;
+    	}
+    </style>
+</head>
+
+<body>
+<div ng-include="'nav.html'" class="navCon">
+    <div style="clear: both"></div>
+</div>
+
+<div class="box" ng-controller='uploadController'>
+    <div class="text">
+        <p class="bigger">Upload your Photos </p>
+        <ul class="ula">
+            <li>您将在UPIC网站免费发布图片。</li>
+            <li>请确认您所发布的图片已经经过了相关人员的同意。</li>
+            <li>当有用户使用您的图片时，我们将会通过您的邮箱通知您，并将您的图片发布在网站首页面。</li>
+            <li>最终解释权归UPIC所有。</li>
+        </ul>
+
+    </div>
+    <div class="chose">
+        <div class="aaa">
+			
+            <form id="form">
+                一级分类
+                <select id="m_one">
+                </select>
+                二级分类
+                <select id="m_two">
+                </select>
+                <input ng-model="mId" style="display:none;" value='1' id='mId'/>
+                <a href="javascript:;" class="a-upload">
+                    <input type="file" name="pic" id="picFile" accept="image/jpeg,image/jpg,image/png">选择文件
+                </a>
+            </form>
+
+        </div>
+
+	    </div>
+	    <div class="up">
+	        <input type="checkbox"/>同意UPIC协议
+	        <input type="button" ng-click='upload()' value="上传" class="a-upload"/>
+	    </div>
+</div>
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/angular.js"></script>
+<script type="text/javascript" src='js/angular-cookies.js'></script>
+<script>
+    let uploadModule = angular.module('uploadModule', ['ngCookies']).
+    	controller('uploadController',($scope,$http,$cookieStore)=>{
+    		$scope.upload = ()=>{
+        		var formData = new FormData()
+        		formData.append("mId",$('#mId').val())
+        		formData.append("pic",$("#picFile")[0].files[0])
+        		$http({
+        			url:'/upic-show/upload',
+        			method:'POST',
+        			data:formData,
+        			headers:{
+        				'Content-Type':undefined
+        			}
+        		}).success((data)=>{
+        			console.log(data)
+        			if(data[0] == '上传失败'){
+        				alert('上传失败')
+        				return;
+        			}else{
+        				alert('上传成功')
+        			}
+        		}).error(()=>{
+        			alert('请求失败')
+        		})
+    		}
+            if($cookieStore.get("user") != undefined){
+         	   $scope.isLogin = true
+         	   console.log($cookieStore.get("user"))
+         	   $scope.userName = $cookieStore.get("user")['userNumber']
+            }
+             $scope.logout = ()=>{
+             	$cookieStore.remove("user")
+             	alert('注销成功')
+             	location.reload()
+             }
+    	})
+    $(document).ready(function () {
+        $("#div1").hide();
+        $("#div2").hide();
+        $("#div3").hide();
+        $("#div4").hide();
+        $("#div5").hide();
+    })
+
+    $("#nav li").on("mousemove", function () {
+        $("div").eq($(this).index()).show();
+    })
+
+    $("#nav li").on("mouseleave", function () {
+        $("div").eq($(this).index()).hide();
+    })
+
+    let types = [{
+        "m_one": "精选收藏夹",
+        "m_two": [{
+            "id": 1,
+            "name": "明星设计师"
+        }, {
+            "id": 2,
+            "name": "世界杯"
+        }, {
+            "id": 3,
+            "name": "毕业季"
+        }]
+    },
+        {
+            "m_one": "商用海报",
+            "m_two": [{
+                "id": 4,
+                "name": "旅游海报"
+            }, {
+                "id": 5,
+                "name": "美食海报"
+            }, {
+                "id": 6,
+                "name": "招聘海报"
+            }]
+        },
+        {
+            "m_one": "手机用图",
+            "m_two": [{
+                "id": 7,
+                "name": "表情包配图"
+            }, {
+                "id": 8,
+                "name": "企业宣传"
+            }]
+        },
+        {
+            "m_one": "描画插图",
+            "m_two": [{
+                "id": 9,
+                "name": "夏天插画"
+            }, {
+                "id": 10,
+                "name": "星空插画"
+            }]
+        }
+    ]
+
+    for (let i = 0; i < 4; i++) {
+        let option = $('<option>')
+        option.val(types[i]['m_one'])
+        option.text(types[i]['m_one'])
+        $('#form').find("#m_one").append(option)
+    }
+
+    $('#form').find("#m_one").change(function () {
+        let val = $(this).val()
+        for (let i = 0; i < 4; i++) {
+            if (val == types[i]['m_one']) {
+                let arr = types[i]['m_two']
+                $('#m_two').empty()
+                for (let j = 0; j < arr.length; j++) {
+                    let option = $('<option>')
+                    option.val(arr[j]['name'])
+                    option.text(arr[j]['name'])
+                    $('#m_two').append(option)
+                }
+                return;
+            }
+        }
+    })
+    $('#form').find("#m_two").change(function(){
+    	let m_one = $('#m_one').val()
+    	for (let i = 0; i < 4; i++) {
+            if (m_one == types[i]['m_one']) {
+                let arr = types[i]['m_two']
+                for (let j = 0; j < arr.length; j++) {
+                    if($('#m_two').val() == arr[j]['name']){
+                    	$('#mId').val(arr[j]['id'])
+                    	console.log($('#mId').val())
+                    }
+                }
+                return;
+            }
+    	}
+    })
+
+</script>
+
+
+</body>
+</html>

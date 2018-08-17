@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html ng-app="indexModule">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="http://www.softwhy.com/"/>
+    <title>UPIC</title>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="css/nav.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/glyphicons.css"/>
+    <link rel="stylesheet" href="css/swiper/swiper.min.css"/>
+    <link rel="stylesheet" href="css/picDisModule.css"/>
+    <link rel="stylesheet" href="css/foot.css"/>
+</head>
+<body ng-controller="mainController">
+    <!--使用angular引入导航栏模板文件-->
+    <div ng-include="'nav.html'" class="navCon">
+        <div style="clear: both"></div>
+    </div>
+	
+	<div class='rank'>
+		<a href="ranklist.html"><span class="glyphicon glyphicon-stats"></span><br/><span class="text">排行榜</span></a>
+		<a href="#"><span class="glyphicon glyphicon-heart-empty"></span><br/><span class="text">打赏</span></a>
+		
+	</div>
+	
+    <!--swiper插件-->
+    <div class="container_pic">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="img/p10.jpg"></div>
+                <div class="swiper-slide"><img src="img/p9.jpg"></div>
+                <div class="swiper-slide"><img src="img/p4.jpg"></div>
+                <div class="swiper-slide"><img src="img/p5.jpg"></div>
+                <div class="swiper-slide"><img src="img/p11.jpg"></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+
+    <!--图片展示区域-->
+    <div class="mainListArea">
+        <div class="mainList">
+            <div class="picGroup">
+                <div class="header">
+                    <div class="glyphicon glyphicon-tree-conifer"></div>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[0]['picType']}}" class="picType"><span>{{picTypes[0]['picType']}}</span></a>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{pst}}" class="picSecType" ng-repeat="pst in picTypes[0]['picSecType']"><span>{{pst}}</span></a>
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[0]['picType']}}" class="toMore"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;更多</a>
+                </div>
+                <div class="pics" data-index="true" setpicdataset="{{url1}}">
+
+                </div>
+            </div>
+            <div class="picGroup">
+                <div class="header">
+                    <div class="glyphicon glyphicon-heart-empty"></div>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[1]['picType']}}" class="picType">{{picTypes[1]['picType']}}</a>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{pst}}" class="picSecType" ng-repeat="pst in picTypes[1]['picSecType']"><span>{{pst}}</span></a>
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[1]['picType']}}" class="toMore"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;更多</a>
+                </div>
+                <div class="pics" data-index="true" setpicdataset="{{url2}}">
+
+                </div>
+            </div>
+            <div class="picGroup">
+                <div class="header">
+                    <div class="glyphicon glyphicon-paperclip"></div>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[2]['picType']}}"  class="picType">{{picTypes[2]['picType']}}</a>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{pst}}" class="picSecType" ng-repeat="pst in picTypes[2]['picSecType']"><span>{{pst}}</span></a>
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[2]['picType']}}" class="toMore"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;更多</a>
+                </div>
+                <div class="pics" data-index="true" setpicdataset="{{url3}}">
+
+                </div>
+            </div>
+            <div class="picGroup">
+                <div class="header">
+                    <div class="glyphicon glyphicon-paperclip"></div>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[3]['picType']}}" class="picType">{{picTypes[3]['picType']}}</a>&nbsp;&nbsp;
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{pst}}" class="picSecType" ng-repeat="pst in picTypes[3]['picSecType']"><span>{{pst}}</span></a>
+                    <a ng-href="/upic-show/upic/list.html?type=picList&&listName={{picTypes[3]['picType']}}" class="toMore"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;更多</a>
+                </div>
+                <div class="pics" data-index="true" setpicdataset="{{url4}}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--使用angular引入底栏-->
+    <div class="footer" ng-include="'./footer.html'"></div>
+    <script src="js/swiper/swiper.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/picDisModule.js"></script>
+    <script type="text/javascript" src="js/angular-cookies.js"></script>
+    <script>
+        let swiper = new Swiper('.swiper-container', {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        })
+        let indexModule = angular.module('indexModule',['picDisModule','ngCookies'])
+        indexModule.controller('mainController',($scope,$http,$cookieStore) => {
+            $scope.url1 = '/upic-show/search?pName=精选收藏夹'
+            $scope.url2 = '/upic-show/search?pName=商用海报'
+           	$scope.url3 = '/upic-show/search?pName=手机用图'
+            $scope.url4 = '/upic-show/search?pName=插画绘图'
+            $scope.picTypes = [{'picType':"精选收藏夹",'picSecType':['明星设计师','世界杯','毕业季']},
+                {'picType':"商用海报",'picSecType':['旅游海报','美食海报','招聘海报']},
+                {'picType':"手机用图",'picSecType':['表情包配图','企业宣传']},
+                {'picType':"插画绘图",'picSecType':['夏天插画','星空插画']}
+            ]
+           if($cookieStore.get("user") != undefined){
+        	   $scope.isLogin = true
+        	   console.log($cookieStore.get("user"))
+        	   $scope.userName = $cookieStore.get("user")['userNumber']
+           }
+            $scope.logout = ()=>{
+            	$cookieStore.remove("user")
+            	alert('注销成功')
+            	location.reload()
+            }
+        })
+    </script>
+</body>
+</html>

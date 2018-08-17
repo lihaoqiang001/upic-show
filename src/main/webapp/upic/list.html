@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="picListModule">
+<head>
+    <meta charset="UTF-8">
+    <title>图片列表</title>
+    <link rel="stylesheet" href="css/picDisModule.css"/>
+    <link rel="stylesheet" href="css/glyphicons.css"/>
+    <link rel="stylesheet" href="css/nav.css"/>
+    <link rel="stylesheet" href="css/foot.css"/>
+    <style>
+        div.listArea{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        div.picListHeader{
+            /*border: 1px solid;*/
+            width: 1200px;
+            height: 80px;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed darkred;
+        }
+        .picListHeader .typeInfo{
+            height: 100%;
+            line-height: 80px;
+        }
+        .picListHeader .typeInfo .text{
+            display: inline-block;
+            font-family: "STsong";
+            font-weight: bolder;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        .listArea .list{
+            display: inline-flex;
+            flex-direction: column;
+            width: 1200px;
+            min-height: 400px;
+        }
+        .logout{
+	        text-decoration: none;
+	        color:black;
+	        border:0;
+        }
+   
+        .logout:hover{
+	        text-shadow: 5px 5px 5px black;
+         } 
+    </style>
+</head>
+<body ng-controller="picListController">
+
+    <div class="top">
+    <div class="logo"></div>
+    <div class="top_nav">
+        <nav>
+            <ul class="nav-ul">
+                <li><a ng-click='toIndex()' href="#">首页</a></li>
+                <li>
+                    <a href="#" >精选收藏夹</a>
+                    <ul>
+
+                        <li class="nav-effect-1" id="force"><a href="#">明星设计师</a></li>
+                        <li class="nav-effect-2"><a href="#">世界杯</a></li>
+                        <li class="nav-effect-3"><a href="#">毕业季</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">商用海报</a>
+                    <ul>
+
+                        <li class="nav-effect-1" id="force"><a href="#">旅游海报</a></li>
+                        <li class="nav-effect-1"><a href="#">招聘海报</a></li>
+                        <li class="nav-effect-2"><a href="#">美食海报</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">手机用图</a>
+                    <ul>
+                        <li class="nav-effect-1" id="force"><a href="#">表情包配图</a></li>
+                        <li class="nav-effect-1" ><a href="#">企业宣传</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">插画绘图</a>
+                    <ul>
+                        <li class="nav-effect-1" id="force"><a href="#">夏天插画</a></li>
+                        <li class="nav-effect-1" ><a href="#">星空绘图</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >关于我们</a>
+                    <ul>
+                        <li class="nav-effect-2" id="force"><a href="#">关于我们</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="top_two">
+        <input type="text" ng-model="searchWd" id='searchWd' placeholder="   你想要什么？"/>
+        <a ng-click='search()' id='searchBu' class="search"><span  class="glyphicon glyphicon-search"></span>	</a>
+    </div>
+    <div ng-init="isLogin=false" ng-if="!isLogin" class="login">
+        <div class="glyphicon glyphicon-user" style="margin-top: 0;"></div>
+        <a href="login.html" class="sim-button button8">去登录</a>
+        <div class="glyphicon glyphicon-pencil" style="margin-top: 0;"></div>
+        <a href="register.html" class="sim-button button8">去注册</a>
+    </div>
+    <div class=login ng-if="isLogin">
+    	<div class="glyphicon glyphicon-user" style="font-size: 16px;">&nbsp;欢迎您：{{userName}}</div>
+    	<a class='logout' href="javascript:void(0)">注销</a>
+    </div>
+    <div></div>
+</div>
+
+    <div class="body">
+        <div class="header">
+
+        </div>
+
+        <div class="listArea">
+            <div class="picListHeader">
+                <div class="typeInfo"><div style="font-size: 20px;color: #1ABC9C" class="glyphicon glyphicon-picture"></div>&nbsp;&nbsp;<div class="text">{{listHeader}}</div></div>
+            </div>
+            <div class="list">
+                <div setpicdataset="{{picListUrl}}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--使用angular引入底栏-->
+    <div class="footer" ng-include="'./footer.html'"></div>
+    <script src="js/angular.js"></script>
+    <script src="js/picModuleForList.js"></script>
+    <script type="text/javascript" src='js/angular-cookies.js'></script>
+    <script> 
+    
+    let types = [{'m_one':'精选收藏夹','m_two':'明星设计师'},
+    	{'m_one':'精选收藏夹','m_two':'世界杯'},
+    	{'m_one':'精选收藏夹','m_two':'毕业季'},
+    	{'m_one':'商用海报','m_two':'旅游海报'},
+    	{'m_one':'商用海报','m_two':'美食海报'},
+    	{'m_one':'商用海报','m_two':'招聘海报'},
+    	{'m_one':'手机用图','m_two':'表情包配图'},
+    	{'m_one':'手机用图','m_two':'企业宣传'},
+    	{'m_one':'插画绘图','m_two':'夏天插画'},
+    	{'m_one':'插画绘图','m_two':'星空插画'},
+    	]
+    
+        let picListModule = angular.module('picListModule',['picDisModule','ngCookies'])
+        .config(['$locationProvider', function($locationProvider) {
+		  $locationProvider.html5Mode({
+              enabled: true,
+              requireBase: false
+	          });
+			}])
+            .controller('picListController',($scope,$location,$http,$cookieStore)=>{
+				let type = $location.search().type
+				$scope.reload = false
+				$scope.show = false
+				if(type == 'search'){
+					refreshPic($http,$scope,$location.search().pName)
+					$scope.listHeader = '搜索结果：'+$location.search().pName
+				}
+				if(type == 'picList'){
+					refreshPic($http,$scope,$location.search().listName)
+					$scope.listHeader = $location.search().listName
+				}
+				$scope.search = ()=>{
+					refreshPic($http,$scope,$scope.searchWd)
+					$scope.listHeader = '搜索结果：'+$scope.searchWd
+				}
+				
+	           if($cookieStore.get("user") != undefined){
+	        	   $scope.isLogin = true
+	        	   console.log($cookieStore.get("user"))
+	        	   $scope.userName = $cookieStore.get("user")['userNumber']
+	           }
+	            $scope.logout = ()=>{
+	            	$cookieStore.remove("user")
+	            	alert('注销成功')
+	            	location.reload()
+	            }
+	            $scope.toIndex = () => location = 'index.html'
+            })
+            
+            refreshPic = ($http,$scope,kw) =>{
+				$http.get('/upic-show/search?pName='+kw)
+				.success((data) => {
+					$scope.show = true
+					let arr = []
+					console.log(data)
+					for(let i = 0;i < data.length;i++){
+						let tmp = data[i].substr(50,2)
+						let mId = Number(tmp)
+						let obj = {'mId':mId,'m_one':types[mId-1].m_one,'m_two':types[mId-1].m_two,'pUrl':data[i]}
+						arr.push(obj)
+					}
+					
+					$scope.picInfos = arr
+				})
+            }
+    </script>
+
+</body>
+</html>

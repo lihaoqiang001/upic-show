@@ -1,0 +1,100 @@
+.main{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+}
+.picMainCon{
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.picContainer{
+    position: relative;
+    width: 240px;
+    height:400px;
+    /*border:1px solid;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-box-shadow: 5px 4px 6px 0 rgba(0,0,0,.16);
+    box-shadow: 5px 4px 6px 0 rgba(0,0,0,.16);
+    margin: 20px 12px;
+    border-radius: 4px;
+}
+.picContainer .picFooter{
+    width: 100%;
+    height: 30px;
+    /*border: 1px solid;*/
+    position: absolute;
+    bottom: 0;
+    line-height: 30px;
+    background-color: gainsboro;
+}
+.picContainer .picture{
+    width: 100%;
+    height: 370px;
+    /*background-image: url("swiper/img/test.jpg");*/
+    background-size: cover;
+    background-position: center;
+}
+.picCover{
+    position: absolute;
+    /*display: none;*/
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.picContainer .picCoverBg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: black;
+    opacity: 0.4;
+}
+.picContainer .picCover .picCoverTx{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.picContainer .picCover .picInfo{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    height: 100px;
+    width: 200px;
+    color: white;
+    border-bottom: 1px dashed #ffffff;
+    border-top: 1px dashed #ffffff;
+}
+.picContainer .picCover .picInfo .text{
+    font-size: 16px;
+}
+.dlBtn a{
+    display: inline-block;
+    text-align: center;
+    line-height: 28px;
+    color: white;
+    text-decoration: none;
+    background-color: #17a2b8;
+    border: none;
+    width: 60px;
+    height: 28px;
+    border-radius: 3px;
+    padding: 1px 5px;
+}
+.dlBtn a:hover{
+    background-color: #20c997;
+}
+.hiden{
+    display: none;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="downloadModule">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/download.css"/>
+    <link type="text/css" rel="stylesheet" href="css/nav.css"/>
+    <link href="css/glyphicons.css" type="text/css" rel="stylesheet"/>
+    <link href="css/foot.css" rel="stylesheet"/>
+    <style>
+        .user{
+            max-width: 900px;
+        }
+        .mainbody{
+            padding: 100px 10px 10px 20px;
+        }
+        .tail{
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body ng-controller='downloadController'>
+<div ng-include="'nav.html'" class="navCon">
+    <div style="clear: both"></div>
+</div>
+<div class="mainbody">
+    <div class="left" ng-style="{'background-image':'url({{pUrl}})'}"></div>
+    <div class="right">
+        <div class="right_top">
+            <div class="glyphicon glyphicon-save">
+                <input type="button" value="立即下载" ng-click='download()' target='_black' class="sim-button button8" id="btn"/>
+                <br/>
+            </div>
+            <div class="right_middle">
+                <table>
+                    <tr>
+                        <td rowspan="2">
+                            <div class="user"><img ng-src="img/blurred-background-cap-casual-1206870.jpg"></div>
+                        </td>
+                        <td>
+                            <div class="informa">Author</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLig magni</td>
+                    </tr>
+                </table>
+                <!--<div  class="user"><img src="img/blurred-background-cap-casual-1206870.jpg"></div>-->
+
+            </div>
+            <div class="right_bottom">
+                <span>Upic License</span><br/>
+                <span class="glyphicon glyphicon-leaf"></span>
+                <span>Free for personal and commercial use</span><br/>
+                <span class="glyphicon glyphicon-leaf"></span>
+                <span>No attribution acquire</span><br/>
+                <div class="upload">
+                    <span class="glyphicon glyphicon-open"></span>
+                    <a class="last" href='#' ng-click='toUpload()'>我要上传</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="footer" ng-include="'./footer.html'"></div>
+<script src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-cookies.js"></script>
+<script>
+    let downloadModule = angular.module('downloadModule',['ngCookies'])
+    .config(['$locationProvider', function($locationProvider) {
+		  $locationProvider.html5Mode({
+              enabled: true,
+              requireBase: false
+	          });
+			}])
+    	.controller('downloadController',($scope,$location,$cookieStore)=>{
+    		$scope.pUrl = $location.search().pUrl
+    		console.log($location.search().pUrl)
+    		$scope.toUpload = () => location = 'upload.html'
+    		$scope.download = () => window.open($scope.pUrl)
+    	 if($cookieStore.get("user") != undefined){
+        	   $scope.isLogin = true
+        	   console.log($cookieStore.get("user"))
+        	   $scope.userName = $cookieStore.get("user")['userNumber']
+           }
+            $scope.logout = ()=>{
+            	$cookieStore.remove("user")
+            	alert('注销成功')
+            	location.reload()
+            }
+    	})
+</script>
+</body>
+</html>

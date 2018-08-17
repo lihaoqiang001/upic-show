@@ -1,0 +1,105 @@
+{
+	margin: 0px;
+	padding: 0px;
+	}
+.mainbody{
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	height: 100vh;
+	background:rgba(255,255,255,0.6);
+	padding: 100px;
+	text-align: center;
+	
+}
+.mainbody>div{
+	flex: none;
+}
+.left{
+	width: 70%;
+	height: 100%;
+	/*background-image: url(../img/adventure-alone-backlit-746386.jpg);*/
+	background-repeat: no-repeat;
+	background-size:contain;
+}
+.right{
+	width: 30%;
+	height: 100%;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	padding: 10px;
+}
+.right span{
+	margin: 10px;
+	text-align: left;
+}
+.right_top{
+	width: 100%;
+	height: 20%;
+}
+.right_middle{
+	width: 100%;
+	height: 60%;
+	margin: 50px 0px;
+	justify-content: center;
+	text-align: center;
+}
+.right_middle table
+{
+	text-align: center;
+	
+	
+}
+/*.informa{
+	width: 80px;
+	height: 80px;
+	margin: 0px;
+	justify-content: center;
+	text-align: center;
+	line-height: 100px;*/
+}
+.user{
+	width: 80px;
+	height: 80px;
+}
+.user img{
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+	
+}
+.right_bottom{
+	widows: 100%;
+	height: 20%;
+}
+#btn{
+	width: 300px;
+	height: 50px;
+	border-radius: calc(3);
+	background-color:#1ABC9C;
+	/*background-size: 30px 30px;*/
+	color: white;
+	
+}
+#btn:hover
+{
+	transition: ease-in-out;
+	transition: ease;
+	box-shadow: 5px 5px 5px rgba(0,0,0,1);
+}
+ .last{
+ display:inline-block;
+	width: 300px;
+	height: 50px;
+	border-radius: 3px;
+	background-color:#1ABC9C;
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	line-height: 50px;
+}
+.last:hover{
+	transition: ease-in-out;
+	transition: ease;
+	box-shadow: 5px 5px 5px rgba(0,0,0,1);
+}

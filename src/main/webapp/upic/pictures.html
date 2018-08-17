@@ -1,0 +1,20 @@
+<div class="main">
+    <div class="picMainCon" ng-if="show">
+        <div  ng-repeat="pic in picInfos" class="picContainer" ng-controller="picDisController" ng-mouseleave="hiddenPicCover()" ng-mouseenter="showPicCover()">
+            <div class="picCover" ng-init="isHidden=true" ng-class="{'hiden':isHidden}">
+                <div class="picCoverBg"></div>
+                <div class="picCoverTx">
+                    <div class="picInfo">
+                        <div class="text">
+                            <span class="picType">{{pic.m_one}}</span>&nbsp;|&nbsp;<span class="picName">{{pic.m_two}}</span>
+                        </div>
+                        <br/>
+                        <div class="dlBtn"><a ng-href="{{'download.html?pUrl='+pic.pUrl}}" target="_black"><div class="glyphicon glyphicon-eye-open"></div>&nbsp;查看</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="picture" ng-style="{'background-image':'url({{pic.pUrl}})'}"></div>
+            <div class="picFooter">&nbsp;<div style="color: lightcoral;" class="glyphicon glyphicon-tag"></div>&nbsp;&nbsp;{{pic.m_two}}</div>
+        </div>
+    </div>
+</div>
